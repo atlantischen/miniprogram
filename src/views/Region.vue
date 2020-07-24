@@ -4,7 +4,7 @@
       <span>人员管理</span>
     </div>
     <div class="content">
-      <div id="myCharts" ref="myCharts">213123</div>
+      <div id="myCharts" ref="myCharts"></div>
       <div class="attendance">
         <span class="span1">出勤人数</span>
         <span class="span2">290</span>
@@ -35,6 +35,7 @@ export default {
           {
             name: "业务指标",
             type: "gauge",
+            radius: "70%", //仪表大小
             min: 0,
             max: 100,
             detail: {

@@ -1,7 +1,7 @@
 <template>
   <div class="template">
     <!-- <div v-if="isVertical">请横屏使用</div> -->
-    <div class="box" >
+    <div class="box">
       <div class="aside">
         <div class="logo">
           <img src="../assets/image/index-logo.png" alt />
@@ -35,7 +35,7 @@
         </div>
         <div class="content">
           <!-- <keep-alive> -->
-            <router-view></router-view>
+          <router-view></router-view>
           <!-- </keep-alive> -->
 
           <div class="btn">
@@ -52,7 +52,7 @@
   </div>
 </template>
 
-<script>  
+<script>
 import Weather from "../components/Weather";
 import Flexible from "../../static/flexible.js";
 export default {
@@ -69,7 +69,7 @@ export default {
 
   mounted() {
     this.renderResize();
-	var flexible = new Flexible(1334, 750, 'no_border');
+    var flexible = new Flexible(1334, 750, "fixed_width ");
     window.addEventListener("resize", this.renderResize, false);
   },
   beforeDestroy() {},
@@ -87,19 +87,15 @@ export default {
         window.removeEventListener("resize", this.renderResize, false);
       } else {
         this.isVertical = true;
-        
       }
 
       // 做页面适配
       // 注意：renderResize方法执行时虚拟dom尚未渲染挂载，如果要操作vue实例，最好在this.$nextTick()里进行。
-    },
-
+    }
   }
 };
 </script>
 <style lang="less" scoped>
-
-
 @keyframes a {
   from {
     transform: translateX(-100%);
@@ -115,7 +111,7 @@ export default {
 .box {
   width: 100%;
   height: 100%;
-  
+
   background-image: url("../assets/image/index-bj5.png");
   background-position: center;
   display: flex;
@@ -141,7 +137,7 @@ export default {
         color: #fff;
         display: flex;
         align-items: center;
-        transition: all .5s ease;
+        transition: all 0.5s ease;
         & > img {
           margin: 0 30px 0 12px;
           z-index: 2;

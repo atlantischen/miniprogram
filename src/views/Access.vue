@@ -63,16 +63,16 @@ export default {
   computed: {},
   mounted() {
     var mySwiper = new Swiper(".swiper-container", {
-      slidesPerView: "auto",
+
       effect: "coverflow",
       slidesPerView: 2,
       initialSlide: 1,
-      // spaceBetween: 0,
+      spaceBetween: 0,
       centeredSlides: true,
       coverflowEffect: {
         rotate: 0,
         stretch: 0, // 指的时后面一张图片被前一张图片遮挡的部分
-        depth: 250, // 图片缩小的部分
+        depth: 200, // 图片缩小的部分
         modifier: 2
       },
       // direction: 'vertical', // 垂直切换选项
@@ -135,8 +135,11 @@ export default {
         background-color: #ff6700;
         height: 189px;
       }
-    
     }
+    // .swiper-slide {
+    //   width: auto !important;
+    //   margin-right: 15px !important;
+    // }
     .swiper-button-prev,
     .swiper-button-next {
       width: 44px;
@@ -167,7 +170,7 @@ export default {
       display: flex;
       justify-content: center;
       margin-top: 10px;
-      }
+    }
     .swiper-pagination-bullet {
       background-color: #fff;
       margin-right: 12px;
