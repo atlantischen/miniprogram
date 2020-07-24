@@ -66,16 +66,17 @@ export default {
       slidesPerView: "auto",
       effect: "coverflow",
       slidesPerView: 2,
+      initialSlide: 1,
       // spaceBetween: 0,
       centeredSlides: true,
       coverflowEffect: {
         rotate: 0,
         stretch: 0, // 指的时后面一张图片被前一张图片遮挡的部分
-        depth: 100, // 图片缩小的部分
+        depth: 250, // 图片缩小的部分
         modifier: 2
       },
       // direction: 'vertical', // 垂直切换选项
-      loop: true, // 循环模式选项
+      // loop: true, // 循环模式选项
 
       // 如果需要分页器
       pagination: {
@@ -109,6 +110,8 @@ export default {
   align-items: center;
   .title {
     background-image: url("../assets/image/index-bq.png");
+    background-size: 100%;
+
     width: 595px;
     height: 45px;
     position: relative;
@@ -132,6 +135,7 @@ export default {
         background-color: #ff6700;
         height: 189px;
       }
+    
     }
     .swiper-button-prev,
     .swiper-button-next {
@@ -144,13 +148,13 @@ export default {
       }
     }
     .swiper-button-prev {
-      // left: 43px;
+      left: 43px;
       background-image: url("../assets/image/index-left.png");
       background-repeat: no-repeat;
       background-size: 100%;
     }
     .swiper-button-next {
-      // right: 36px;
+      right: 36px;
       background-image: url("../assets/image/index-right.png");
       background-repeat: no-repeat;
       background-size: 100%;
@@ -158,10 +162,12 @@ export default {
     .swiper-pagination {
       width: 100px;
       height: 10px;
-      // position: absolute;
       left: 50%;
       transform: translateX(-50%);
-    }
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      }
     .swiper-pagination-bullet {
       background-color: #fff;
       margin-right: 12px;
