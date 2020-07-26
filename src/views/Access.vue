@@ -57,44 +57,61 @@ export default {
   //
   data() {
     return {
-      show: false
+      show: false,
+      swiper: null,
     };
   },
   computed: {},
   mounted() {
-    var mySwiper = new Swiper(".swiper-container", {
-
-      effect: "coverflow",
-      slidesPerView: 2,
-      initialSlide: 1,
-      spaceBetween: 0,
-      centeredSlides: true,
-      coverflowEffect: {
-        rotate: 0,
-        stretch: 0, // 指的时后面一张图片被前一张图片遮挡的部分
-        depth: 200, // 图片缩小的部分
-        modifier: 2
-      },
-      // direction: 'vertical', // 垂直切换选项
-      // loop: true, // 循环模式选项
-
-      // 如果需要分页器
-      pagination: {
-        el: ".swiper-pagination"
-      },
-      // 如果需要前进后退按钮
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
-      }
-
-      // 如果需要滚动条
-      // scrollbar: {
-      //   el: '.swiper-scrollbar',
-      // },
-    });
+    console.log(this.swiper);
   },
-  methods: {}
+  created() {
+    this.$nextTick(() => {
+      this.mySwiper();
+
+    });
+    // window.addEventListener("orientationchange",()=>{
+    // console.log('wewewe');
+    //   this.$nextTick(() => {
+    //   this.mySwiper();
+    //   this.swiper.update();
+    // });
+    // });
+  },
+  methods: {
+    mySwiper() {
+      this.swiper = new Swiper(".swiper-container", {
+        effect: "coverflow",
+        slidesPerView: 2,
+        initialSlide: 1,
+        spaceBetween: 0,
+        centeredSlides: true,
+        coverflowEffect: {
+          rotate: 0,
+          stretch: 0, // 指的时后面一张图片被前一张图片遮挡的部分
+          depth: 200, // 图片缩小的部分
+          modifier: 2,
+        },
+        // direction: 'vertical', // 垂直切换选项
+        // loop: true, // 循环模式选项
+
+        // 如果需要分页器
+        pagination: {
+          el: ".swiper-pagination",
+        },
+        // 如果需要前进后退按钮
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+
+        // 如果需要滚动条
+        // scrollbar: {
+        //   el: '.swiper-scrollbar',
+        // },
+      });
+    },
+  },
 };
 </script>
 
@@ -238,10 +255,12 @@ export default {
     }
     .down {
       background: rgba(6, 103, 150, 1);
+      
       .appointment {
-        // width: 238px;
+        width: 255px;
+        margin-left: 11px;
         .use_appointment {
-          margin: 0 45px 0 11px;
+          
         }
       }
     }

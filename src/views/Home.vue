@@ -7,26 +7,11 @@
           <img src="../assets/image/index-logo.png" alt />
         </div>
         <ul class="list">
-          <li @click="handleClick(1, '/staff')" :class="{ 'is-active': selectIndex === 1 }">
-            <img src="../assets/image/icon-rygl.png" alt />
-            <span>人员管理</span>
+          <li  v-for="item in routeList" :key="item.index" @click="handleClick(item.index, item.route)" :class="{ 'is-active': selectIndex === item.index }">
+            <img :src="item.icon" alt />
+            <span>{{item.name}}</span>
           </li>
-          <li @click="handleClick(2, '/access')" :class="{ 'is-active': selectIndex === 2 }">
-            <img src="../assets/image/icon-mjqx.png" alt />
-            <span>门禁权限</span>
-          </li>
-          <li @click="handleClick(3, '/region')" :class="{ 'is-active': selectIndex === 3 }">
-            <img src="../assets/image/icon-qugnsm.png" alt />
-            <span>区域功能说明</span>
-          </li>
-          <li @click="handleClick(4)" :class="{ 'is-active': selectIndex === 4 }">
-            <img src="../assets/image/icon-syzt.png" alt />
-            <span>会议室使用状态</span>
-          </li>
-          <li @click="handleClick(5)" :class="{ 'is-active': selectIndex === 5 }">
-            <img src="../assets/image/icon-ryjk.png" alt />
-            <span>能源监控</span>
-          </li>
+        
         </ul>
       </div>
       <div class="article">
@@ -38,14 +23,14 @@
           <router-view></router-view>
           <!-- </keep-alive> -->
 
-          <div class="btn">
+          <!-- <div class="btn">
             <div class="btn1">
               <img src="../assets/image/index-gj.png" alt />
             </div>
             <div class="btn2">
               <img src="../assets/image/index-gj.png" alt />
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -63,8 +48,26 @@ export default {
   data() {
     return {
       selectIndex: 1,
-      isVertical: true
+      isVertical: true,
+      routeList:[
+      {index:1,name:'人员管理',route:'/staff',icon:require('../assets/image/icon-rygl.png')},
+      {index:2,name:'门禁权限',route:'/access',icon:require('../assets/image/icon-mjqx.png')},
+      {index:3,name:'区域功能说明',route:'/area',icon:require('../assets/image/icon-qugnsm.png')},
+      {index:4,name:'会议室使用状态',route:'/meeting',icon:require('../assets/image/icon-syzt.png')},
+      {index:5,name:'能源监控',route:'/monitor',icon:require('../assets/image/icon-ryjk.png')}]
     };
+  },
+  watch:{
+    $route:{
+      handler(to){
+       for(let item of this.routeList){
+         if(item.route ===to.path){
+           this.selectIndex =item.index
+         }
+       }
+      },
+      immediate:true
+    }
   },
 
   mounted() {
@@ -76,7 +79,6 @@ export default {
   methods: {
     handleClick(index, path) {
       this.$router.push(`${path}`);
-      this.selectIndex = index;
     },
     renderResize() {
       // 判断横竖屏
@@ -146,9 +148,6 @@ export default {
           white-space: nowrap;
           z-index: 2;
         }
-        &.is-active {
-          // font-size: 25px;
-        }
         &.is-active::after {
           content: "";
           position: absolute;
@@ -160,13 +159,6 @@ export default {
         }
       }
     }
-    // .active {
-    //   background-image: url("../assets/image/icon-bj.png");
-    //   background-repeat: no-repeat;
-    //   width: 172px;
-    //   height: 87px;
-    //   // height: 94px;
-    // }
   }
   .article {
     width: 100%;
