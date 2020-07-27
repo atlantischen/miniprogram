@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 const originalPush = VueRouter.prototype.push
-   VueRouter.prototype.push = function push(location) {
-   return originalPush.call(this, location).catch(err => err)
+VueRouter.prototype.push = function push(location) {
+	return originalPush.call(this, location).catch(err => err)
 }
 const routes = [
 	{
@@ -27,9 +27,19 @@ const routes = [
 				component: () => import('@/views/Access'),
 			},
 			{
-				path: '/region',
+				path: '/area',
 				name: 'Region',
 				component: () => import('@/views/Region'),
+			},
+			{
+				path: '/monitor',
+				name: 'Monitor',
+				component: () => import('@/views/Monitor'),
+			},
+			{
+				path: '/meeting',
+				name: 'Meeting',
+				component: () => import('@/views/Meeting'),
 			},
 		],
 	},

@@ -4,15 +4,41 @@
       <span>人员管理</span>
     </div>
     <div class="content">
-      <div id="myCharts" ref="myCharts"></div>
+
+        <div id="myCharts" ref="myCharts"></div>
+
+
       <div class="attendance">
         <span class="span1">出勤人数</span>
         <span class="span2">290</span>
       </div>
       <div class="number">
-        <div class="up"></div>
-        <div class="middle"></div>
-        <div class="down"></div>
+        <div class="up">
+          <div class="chuqin">
+            <div class="chuqin_person">出勤人数</div>
+            <div class="chuqin_num">280</div>
+          </div>
+          <div class="chidao">
+            <div class="chidao_person">迟到人数</div>
+            <div class="chidao_num">5</div>
+          </div>
+        </div>
+        <div class="middle">
+          <div class="qingjia">
+            <div class="qingjia_preson">请假人数</div>
+            <div class="qingjia_num">6</div>
+          </div>
+          <div class="chuchai">
+            <div class="chuchai_person">出差人数</div>
+            <div class="chuchai_num">20</div>
+          </div>
+        </div>
+        <div class="down">
+          <div class="laifang">
+            <div class="laifang_person">来访人数</div>
+            <div class="laifang_num">10</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -24,13 +50,13 @@ export default {
   name: "Region",
   methods: {
     drawChart() {
+      // 初始化echarts
       const myCharts = this.$echarts.init(this.$refs.myCharts);
-
+      this.myCharts = myCharts;
       let option = {
         tooltip: {
           formatter: "{a} <br/>{b} : {c}%"
         },
-
         series: [
           {
             name: "业务指标",
@@ -41,6 +67,13 @@ export default {
             detail: {
               show: false
             },
+            // grid: {
+
+            //   width: "2.5rem",
+            //   height: "2.5rem",
+
+            // },
+
             axisTick: {
               show: false
             },
@@ -60,31 +93,10 @@ export default {
                 // 属性lineStyle控制线条样式
                 width: 15,
                 color: [
-                  [
-                    1,
-                    new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                      {
-                        offset: 0,
-                        color: "#15B5FF"
-                      },
-                      {
-                        offset: 0.2,
-                        color: "#083175"
-                      },
-                      {
-                        offset: 0.5,
-                        color: "#CEE326"
-                      },
-                      {
-                        offset: 0.6,
-                        color: "#EBD212"
-                      },
-                      {
-                        offset: 1,
-                        color: "#FF6A00"
-                      }
-                    ])
-                  ]
+                  [0.2, "#91c7ae"],
+                  [0.4, "#63869e"],
+                  [0.6, "#ff6700"],
+                  [1, "#c23531"]
                 ]
               }
             }
@@ -95,8 +107,20 @@ export default {
     }
   },
   mounted() {
-    this.drawChart();
-  }
+    this.$nextTick(() => {
+      this.drawChart();
+    });
+
+    let _this = this;
+    // Echarts.resize()是echarts的对图表进行重新绘制的方法,结合 函数防抖（debounce）避免在窗口大小变化时频繁的进行图表的resize()。
+    window.addEventListener("resize", function() {
+      if (_this.resizeTimer) clearTimeout(_this.resizeTimer);
+      _this.resizeTimer = setTimeout(function() {
+        _this.myCharts.resize();
+      }, 100);
+    });
+  },
+  created() {}
 };
 </script>
 
@@ -127,12 +151,17 @@ export default {
   .content {
     width: 100%;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+  // .box{
+  //    height: 250px;
+  //     width: 250px;
+  // }
     #myCharts {
-      height: 250px !important;
-      width: 250px !important;
+      height: 250px;
+      width: 250px;
+      margin: 0 auto;
       & > div {
         width: 100%;
         height: 100%;
@@ -146,7 +175,6 @@ export default {
       position: absolute;
       top: 11px;
       right: 50px;
-      width: 154px;
       height: 60px;
       display: flex;
       justify-content: center;
@@ -170,17 +198,66 @@ export default {
     }
     .number {
       width: 100%;
-      height: 100%;
       margin-top: -25px;
       display: flex;
       flex-direction: column;
       align-items: center;
       font-size: 26px;
+      color: #fff;
       .up,
       .middle,
       .down {
         width: 602px;
         height: 45px;
+        display: flex;
+        align-items: center;
+      }
+      .chuqin_num,
+      .chidao_num,
+      .qingjia_num,
+      .chuchai_num,
+      .laifang_num {
+        color: #01bbf6;
+      }
+      .up {
+        display: flex;
+        align-items: center;
+        background-color: #066796;
+        .chuqin {
+          display: flex;
+          justify-content: space-between;
+          width: 208px;
+          margin: 0 127px 0 11px;
+        }
+        .chidao {
+          width: 148px;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+      .middle {
+        .qingjia {
+          width: 180px;
+          margin: 0 155px 0 11px;
+          display: flex;
+          justify-content: space-between;
+        }
+        .chuchai {
+          width: 160px;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+      .down {
+        display: flex;
+        align-items: center;
+        background-color: #066796;
+        .laifang {
+          width: 190px;
+          display: flex;
+          justify-content: space-between;
+          margin-left: 11px;
+        }
       }
     }
   }
