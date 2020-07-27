@@ -16,7 +16,7 @@ export default {
     
   },
   mounted(){
-    console.log('qwww');
+ 
     }
 }
 </script>

@@ -4,7 +4,7 @@
       <span class="title_desc">会议室一</span>
     </div>
     <div class="swiper">
-      <div class="swiper-container">
+      <div class="swiper-container" dir="rtl">
         <div class="swiper-wrapper">
           <div class="swiper-slide">Slide 1</div>
           <div class="swiper-slide">Slide 2</div>
@@ -58,17 +58,14 @@ export default {
   data() {
     return {
       show: false,
-      swiper: null,
+      swiper: null
     };
   },
   computed: {},
-  mounted() {
-    
-  },
+  mounted() {},
   created() {
     this.$nextTick(() => {
       this.mySwiper();
-
     });
     // window.addEventListener("orientationchange",()=>{
     // console.log('wewewe');
@@ -90,28 +87,35 @@ export default {
           rotate: 0,
           stretch: 0, // 指的时后面一张图片被前一张图片遮挡的部分
           depth: 200, // 图片缩小的部分
-          modifier: 2,
+          modifier: 2
         },
         // direction: 'vertical', // 垂直切换选项
         // loop: true, // 循环模式选项
-
         // 如果需要分页器
         pagination: {
-          el: ".swiper-pagination",
+          el: ".swiper-pagination"
         },
         // 如果需要前进后退按钮
         navigation: {
           nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+          prevEl: ".swiper-button-prev"
         },
-
+        on: {
+          touchMove: function(event) {
+            //你的事件
+            // console.log(event);
+            
+        
+            
+          }
+        }
         // 如果需要滚动条
         // scrollbar: {
         //   el: '.swiper-scrollbar',
         // },
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -255,12 +259,11 @@ export default {
     }
     .down {
       background: rgba(6, 103, 150, 1);
-      
+
       .appointment {
         width: 255px;
         margin-left: 11px;
         .use_appointment {
-          
         }
       }
     }

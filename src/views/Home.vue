@@ -62,9 +62,7 @@ export default {
     $route:{
       handler(to){
        for(let item of this.routeList){
-         if(item.route ===to.path){
-           this.selectIndex =item.index
-         }
+         if(item.route ===to.path) this.selectIndex =item.index
        }
       },
       immediate:true
@@ -87,10 +85,14 @@ export default {
       let width = document.documentElement.clientWidth;
       let height = document.documentElement.clientHeight;
       if (width > height) {
-        this.isVertical = false;
+        // window.location.reload()
+        console.log('weew');
+        
         window.removeEventListener("resize", this.renderResize, false);
       } else {
-        this.isVertical = true;
+        // this.isVertical = true;
+        console.log('sushu');
+
       }
 
       // 做页面适配
@@ -100,7 +102,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@keyframes a {
+@keyframes move {
   from {
     transform: translateX(-100%);
   }
@@ -158,10 +160,10 @@ export default {
           width: 172px;
           height: 94px;
           background: url(../assets/image/icon-bj.png) no-repeat;
-         -webkit-animation: a 0.4s ease forwards;
-         -moz-animation: a 0.4s ease forwards;
-         -ms-animation: a 0.4s ease forwards;
-          animation: a 0.4s ease forwards;
+         -webkit-animation: move 0.4s ease ;
+         -moz-animation: move 0.4s ease ;
+         -ms-animation: move 0.4s ease ;
+          animation: move 0.4s ease ;
           background-size: 100% 100%;
         }
       }
