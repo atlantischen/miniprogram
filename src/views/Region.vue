@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import echarts from 'echarts'
+import echarts from "echarts";
 export default {
   name: "Region",
   methods: {
@@ -59,32 +59,33 @@ export default {
               lineStyle: {
                 // 属性lineStyle控制线条样式
                 width: 15,
-               color: [
-                        [1,new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                          {
-                             offset: 0,
-                            color: "#15B5FF"
-                          },
-                          {
-                            offset: 0.2,
-                            color: "#083175"
-                          },
-                           {
-                            offset: 0.5,
-                            color: "#CEE326"
-                          },
-                          {
-                            offset: 0.6,
-                            color: "#EBD212"
-                          },
-                          {
-                            offset: 1,
-                            color: "#FF6A00"
-                          }
-                        ])
-                      ]
-                    ],
-
+                color: [
+                  [
+                    1,
+                    new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                      {
+                        offset: 0,
+                        color: "#15B5FF"
+                      },
+                      {
+                        offset: 0.2,
+                        color: "#083175"
+                      },
+                      {
+                        offset: 0.5,
+                        color: "#CEE326"
+                      },
+                      {
+                        offset: 0.6,
+                        color: "#EBD212"
+                      },
+                      {
+                        offset: 1,
+                        color: "#FF6A00"
+                      }
+                    ])
+                  ]
+                ]
               }
             }
           }
@@ -130,8 +131,16 @@ export default {
     flex-direction: column;
     align-items: center;
     #myCharts {
-      height: 250px;
-      width: 250px;
+      height: 250px !important;
+      width: 250px !important;
+      & > div {
+        width: 100%;
+        height: 100%;
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+      }
     }
     .attendance {
       position: absolute;
@@ -159,15 +168,17 @@ export default {
         color: #00b6ff;
       }
     }
-    .number{
+    .number {
       width: 100%;
       height: 100%;
       margin-top: -25px;
-      display:flex;
+      display: flex;
       flex-direction: column;
       align-items: center;
       font-size: 26px;
-      .up,.middle,.down{
+      .up,
+      .middle,
+      .down {
         width: 602px;
         height: 45px;
       }
